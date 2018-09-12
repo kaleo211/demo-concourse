@@ -1,0 +1,16 @@
+jobs:
+- name: a-cool-job
+  plan:
+  - get: cool-project
+    trigger: true
+  - task: a-cool-task
+    file: project/ci/asaka-pr/tasks/check-image.yml
+    params:
+      A_VERY_COOL_ENV:                    {{value_for_a_very_cool_env}}
+
+resources:
+- name: cool-project
+  type: git
+  source:
+    uri: https://github.com/kaleo211/demo-concourse.git
+    branch: master

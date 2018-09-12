@@ -7,6 +7,18 @@ jobs:
     file: cool-project/ci/tasks/a-cool-task.yml
     params:
       A_VERY_COOL_ENV:                    {{value_for_a_very_cool_env}}
+      A_VERY_COOL_RETURN_CODE:            {{value_for_return_code}}
+  on_failure:
+    task: alert
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: ubuntu
+      run:
+        path: echo
+        args: ['this is not that cool!']
 
 resources:
 - name: cool-project
